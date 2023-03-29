@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DevInfor>
+<Wechat AppId="1" AppSecret="1" />
+<QQ AppId="1" AppKey="1" ShareByAppClient="true" />
+<SinaWeibo AppKey="1" AppSecret="#{WB_APP_SECRET}" ShareByAppClient="false" RedirectUrl="http://www.sharesdk.cn" />
+<WechatMoments AppId="1" AppSecret="1" />
+<WechatFavorite AppId="1" AppSecret="1" />
+</DevInfor>

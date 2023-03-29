@@ -1,0 +1,40 @@
+android {
+	 productFlavors {
+		 "ceshi1000012" {
+			 applicationId "com.yanshiv8.huosuapp"
+			 versionCode 3
+			 versionName "3.0"
+			 resValue( "string", "app_name", "V8测试标准版h5app" )
+			 resValue( "string", "accessibility_service_name", "V8测试标准版h5app自动安装" )
+			 buildConfigField( "int", "projectCode", "1000012" )
+			 buildConfigField("String", "USE_URL", '"1"')
+			 buildConfigField("String", "USE_PLATFORM_MONEY", '"1"')
+			 buildConfigField("String", "URL_SCHEMA", '"http://"')
+			 buildConfigField("String", "URL_PRE", '"v8api."')
+			 buildConfigField("String", "URL", '"1tsdk.com"')
+			 buildConfigField("String", "URL_SUFFIX", '"/"')
+			 buildConfigField("String", "IP", '"120.25.152.57"')
+			 buildConfigField("String", "RSA_CUSTOM_PUBLIC_KEY", '"MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCgpFtlhhGf+4BNjC5aXXumEsp/38oGTbHMDMWskXDqztpWX9AvmdAQIjnViYtANEHpXZV9TRUUvoHFW8vM/Virb2kKnBwyJDTcZ1UPjzos5GGROExbs296NZqkJLztJ4XsCG5s0kSaXvE0YJ8og7Yiaycryj4STXNkyVJjkls/pQIDAQAB"')
+			 buildConfigField("String", "AUTH_TYPE", '"3"')
+			 buildConfigField("String", "goto_url_scheme", '"xxxx"')
+			 buildConfigField("String", "h5_url", '""')
+			 buildConfigField("String", "HAS_H5", '"1"')
+			 buildConfigField("String", "HAS_GM", '"1"')
+
+			 buildConfigField("String", "HAS_THIRD_LOGIN", '"1"')
+			 buildConfigField("String", "USE_MESSGAE", '"1"')
+			 buildConfigField("String", "qq_appid", '"101570513"')
+			 buildConfigField("String", "qq_appkey", '"6cff148a470aac45cfb2e3db5fdd984f"')
+			 buildConfigField("String", "wx_appid", '"wx0f4a2ecb77106ba9"')
+			 buildConfigField("String", "wx_appkey", '"50456f9476d64ec72534bcc4c1ea3c86"')
+			 buildConfigField("String", "wb_appid", '""')
+			 buildConfigField("String", "wb_appkey", '""')
+			 buildConfigField("String", "wb_directurl", '""')
+			 buildConfigField("String", "DEFAULT_PARTNER", '""')
+			 buildConfigField("String", "DEFAULT_SELLER", '""')
+			 buildConfigField("String", "PRIVATE", '""')
+			 buildConfigField("String", "BASE_URL", '"http://v8api.1tsdk.com"')
+			 manifestPlaceholders = [HS_APPID : "100",HS_CLIENTID : "77",HS_APPKEY : "32a6d06ca1ddd8e7518da466996f4262",HS_CLIENTKEY : "32a6d06ca1ddd8e7518da466996f4262",qqscheme : "tencent101570513"]
+		 }
+	 }
+}

@@ -1,0 +1,126 @@
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def configProperties = new Properties()
+def configPropertiesFile = rootProject.file('config.properties')
+if (configPropertiesFile.exists()) {
+    configPropertiesFile.withReader('UTF-8') { reader ->
+        configProperties.load(reader)
+    }
+}
+
+
+def flutterRoot = localProperties.getProperty('flutter.sdk')
+if (flutterRoot == null) {
+    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply from: '../MobSDK.gradle'
+//apply from: "../productFlavorsConfig.gradle"
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+
+android {
+    compileSdkVersion 33
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+
+    defaultConfig {
+//        applicationId "com.yanshiv8.huosuapp"
+//        applicationId "cn.sharesdk.demo"
+        applicationId configProperties.getProperty('applicationId')
+        resValue( "string", "app_name", configProperties.getProperty('appName') )
+        minSdkVersion 19
+        targetSdkVersion 29
+        multiDexEnabled true
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.debug
+            minifyEnabled false
+            shrinkResources false
+            ndk {
+                abiFilters "armeabi-v7a"
+            }
+//            applicationVariants.all { variant ->
+//                variant.outputs.all { output ->
+//                    def outputFile = output.outputFile
+//                    if (outputFile != null && outputFile.name.endsWith('.apk')) {
+//                        //输出apk名称为：渠道名_版本名_时间.apk
+//                        def fileName = "flutter_v${flutterVersionName}_${flutterVersionCode}_${releaseTime()}.apk"
+//                        outputFileName = fileName
+//                    }
+//                }
+//            }
+        }
+    }
+    //签名信息
+    signingConfigs {
+        debug {
+            storeFile file("key/huoapp_key.jks")
+            storePassword "huoapp"
+            keyAlias "huoshu"
+            keyPassword "huoapp"
+            v2SigningEnabled false
+        }
+        release {
+            storeFile file("key/huoapp_key.jks")
+            storePassword "huoapp"
+            keyAlias "huoshu"
+            keyPassword "huoapp"
+            v2SigningEnabled false
+        }
+    }
+    dexOptions{
+        javaMaxHeapSize "4g"
+    }
+}
+
+
+def releaseTime() {
+    return new Date().format("yyyy-MM-dd", TimeZone.getTimeZone("UTC"))
+}
+
+
+flutter {
+    source '../..'
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+}
+
